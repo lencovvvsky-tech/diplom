@@ -60,7 +60,7 @@ async function loadReviews(append = false) {
 
     try {
         // Формируем URL с параметрами
-        const url = new URL('https://diplom-production-d7d0.up.railway.app');
+        const url = new URL('https://diplom-production-d7d0.up.railway.app/api/reviews');
         url.searchParams.append('page', currentPage);
         url.searchParams.append('limit', limit);
         if (currentRating !== 'all') {
@@ -162,7 +162,7 @@ async function submitReview(e) {
     }
 
     try {
-        const response = await fetch('https://diplom-production-d7d0.up.railway.app', {
+        const response = await fetch('https://diplom-production-d7d0.up.railway.app/api/reviews', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
