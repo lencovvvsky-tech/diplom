@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // data['g-recaptcha-response'] = recaptcha;
 
         try {
-            const response = await fetch('http://localhost:3000/api/feedback', {
+            const response = await fetch('https://diplom-production-d7d0.up.railway.app', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
