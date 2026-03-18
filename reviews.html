@@ -26,23 +26,19 @@
                 </nav>
                 <div class="header__contacts">
                     <a href="tel:+79624559569" class="phone">+7 (962) 455-95-69</a>
-                    <button class="btn btn--small">Позвонить</button>
                 </div>
                 <button class="theme-toggle" id="theme-toggle">🌙</button>
             </div>
         </div>
     </header>
-
     <main>
         <section class="reviews-page">
             <div class="container">
                 <h1>Отзывы наших клиентов</h1>
-
                 <!-- Список отзывов -->
                 <div class="reviews__grid" id="reviews-container">
                     <!-- Отзывы из базы -->
                 </div>
-
                 <!-- Форма добавления отзыва (красивая) -->
                 <div class="review-form">
                     <h2>Оставить отзыв</h2>
@@ -52,20 +48,18 @@
                             <label for="author">Ваше имя</label>
                             <input type="text" id="author" name="author" placeholder="Например, Анна" required>
                         </div>
-
                         <!-- Дата (автоматически) -->
                         <div class="form-group">
                             <label for="date">Дата</label>
                             <input type="date" id="date" name="date" readonly>
                         </div>
-
-                        <!-- Отзыв (большое поле) -->
+                        <!-- Отзыв -->
                         <div class="form-group">
                             <label for="text">Ваш отзыв</label>
                             <textarea id="text" name="text" placeholder="Напишите, что вам понравилось..." rows="6" required></textarea>
                         </div>
 
-                        <!-- Рейтинг звёздами (стилизованный) -->
+                        <!-- Рейтинг звёздами -->
                         <div class="form-group rating-group">
                             <label>Оценка</label>
                            <div class="stars">
@@ -76,7 +70,7 @@
     <input type="radio" name="rating" value="1" id="star1"><label for="star1">★</label>
 </div>
 
-                        <!-- Ссылка на Яндекс (необязательно) -->
+                        <!-- Ссылка на Яндекс -->
                         <div class="form-group">
                             <label for="yandex_link">Ссылка на Яндекс.Отзывы (необязательно)</label>
                             <input type="url" id="yandex_link" name="yandex_link" placeholder="https://yandex.ru/maps/...">
@@ -94,7 +88,6 @@
             </div>
         </section>
     </main>
-
     <!-- Футер -->
     <footer class="footer">
         <div class="container">
@@ -122,7 +115,6 @@
             </div>
         </div>
     </footer>
-
     <script src="js/theme.js"></script>
     <script src="js/reviews.js"></script>
     <script src="js/notifications.js"></script>
