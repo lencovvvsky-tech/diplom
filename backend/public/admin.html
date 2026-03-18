@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Админ-панель - Демиург Мебель</title>
+    <style>
+        body { font-family: Arial; background: #f5f5f5; margin: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 { color: #333; }
+        .section { background: white; padding: 20px; margin-bottom: 30px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #ddd; }
+        .status { padding: 4px 8px; border-radius: 4px; font-size: 0.9em; }
+        .status.new { background: #ffd700; }
+        .status.processed { background: #90ee90; }
+        .status.pending { background: #ffcccb; }
+        .status.published { background: #90ee90; }
+        button { background: #FF4949; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; margin-right: 5px; }
+        button:hover { opacity: 0.9; }
+        .logout { float: right; }
+        .delete-btn { background: #dc3545; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Админ-панель <button class="logout" onclick="logout()">Выйти</button></h1>
+
+        <!-- Заявки с формы контактов -->
+        <div class="section">
+            <h2>Заявки с формы контактов</h2>
+            <table id="feedback-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Имя</th>
+                        <th>Местоположение</th>
+                        <th>Телефон</th>
+                        <th>Дата</th>
+                        <th>Статус</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <!-- Отзывы -->
+        <div class="section">
+            <h2>Отзывы</h2>
+            <table id="reviews-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Автор</th>
+                        <th>Дата</th>
+                        <th>Текст</th>
+                        <th>Рейтинг</th>
+                        <th>Ссылка</th>
+                        <th>Статус</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Проверка авторизации
+        if (!localStorage.getItem('adminAuth')) {
+            window.location.href = '/admin/login.html';
+        }
+
+        // Логин администратора
+        const adminLogin = localStorage.getItem('adminLogin');
+
+        // Загрузка данных
+        async function loadData() {
+            try {
+                const feedbackRes = await fetch('/api/admin/feedback');
+                const feedback = await feedbackRes.json();
+                const reviewsRes = await fetch('/api/admin/reviews');
+                const reviews = await reviewsRes.json();
+
+                renderFeedback(feedback);
+                renderReviews(reviews);
+            } catch (error) {
+                console.error('Ошибка загрузки данных:', error);
+                alert('Не удалось загрузить данные. Проверьте соединение с сервером.');
+            }
+        }
+
+        // Отображение заявок
+        function renderFeedback(feedback) {
+            const tbody = document.querySelector('#feedback-table tbody');
+            if (!tbody) return;
+            tbody.innerHTML = feedback.map(item => `
+                <tr>
+                    <td>${item.id}</td>
+                    <td>${escapeHtml(item.name)}</td>
+                    <td>${escapeHtml(item.location)}</td>
+                    <td>${escapeHtml(item.phone)}</td>
+                    <td>${new Date(item.created_at).toLocaleString()}</td>
+                    <td><span class="status ${item.status}">${item.status}</span></td>
+                    <td>
+                        ${item.status === 'new' ? `<button onclick="updateFeedbackStatus(${item.id}, 'processed')">✓ Обработано</button>` : ''}
+                        <button class="delete-btn" onclick="deleteFeedback(${item.id})">🗑 Удалить</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Отображение отзывов
+        function renderReviews(reviews) {
+            const tbody = document.querySelector('#reviews-table tbody');
+            if (!tbody) return;
+            tbody.innerHTML = reviews.map(item => `
+                <tr>
+                    <td>${item.id}</td>
+                    <td>${escapeHtml(item.author)}</td>
+                    <td>${item.date}</td>
+                    <td>${escapeHtml(item.text.substring(0, 50))}...</td>
+                    <td>${'★'.repeat(item.rating)}${'☆'.repeat(5 - item.rating)}</td>
+                    <td>${item.yandex_link ? '<a href="' + escapeHtml(item.yandex_link) + '" target="_blank">Яндекс</a>' : ''}</td>
+                    <td><span class="status ${item.status}">${item.status}</span></td>
+                    <td>
+                        ${item.status === 'pending' ? `<button onclick="updateReviewStatus(${item.id}, 'published')"> Опубликовать</button>` : ''}
+                        ${item.status === 'published' ? `<button onclick="updateReviewStatus(${item.id}, 'pending')"> Скрыть</button>` : ''}
+                        <button class="delete-btn" onclick="deleteReview(${item.id})">🗑 Удалить</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Обновление статуса заявки
+        async function updateFeedbackStatus(id, status) {
+            try {
+                const response = await fetch(`/api/admin/feedback/${id}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status, admin: adminLogin })
+                });
+                if (response.ok) {
+                    loadData();
+                } else {
+                    alert('Ошибка при обновлении статуса');
+                }
+            } catch (error) {
+                console.error('Ошибка:', error);
+                alert('Ошибка соединения с сервером');
+            }
+        }
+
+        // Удаление заявки
+        async function deleteFeedback(id) {
+            if (!confirm('Вы уверены, что хотите удалить эту заявку?')) return;
+            try {
+                const response = await fetch(`/api/admin/feedback/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ admin: adminLogin })
+                });
+                if (response.ok) {
+                    loadData();
+                } else {
+                    alert('Ошибка при удалении заявки');
+                }
+            } catch (error) {
+                console.error('Ошибка:', error);
+                alert('Ошибка соединения с сервером');
+            }
+        }
+
+        // Обновление статуса отзыва
+        async function updateReviewStatus(id, status) {
+            try {
+                const response = await fetch(`/api/admin/reviews/${id}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status, admin: adminLogin })
+                });
+                if (response.ok) {
+                    loadData();
+                } else {
+                    alert('Ошибка при обновлении статуса отзыва');
+                }
+            } catch (error) {
+                console.error('Ошибка:', error);
+                alert('Ошибка соединения с сервером');
+            }
+        }
+
+        // Удаление отзыва
+        async function deleteReview(id) {
+            if (!confirm('Вы уверены, что хотите удалить этот отзыв?')) return;
+            try {
+                const response = await fetch(`/api/admin/reviews/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ admin: adminLogin })
+                });
+                if (response.ok) {
+                    loadData();
+                } else {
+                    alert('Ошибка при удалении отзыва');
+                }
+            } catch (error) {
+                console.error('Ошибка:', error);
+                alert('Ошибка соединения с сервером');
+            }
+        }
+
+        // Выход
+        function logout() {
+            localStorage.removeItem('adminAuth');
+            localStorage.removeItem('adminLogin');
+            window.location.href = '/admin/login.html';
+        }
+
+        // Простая защита от XSS для отображения текста
+        function escapeHtml(unsafe) {
+            return unsafe
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        // Загружаем данные при старте
+        loadData();
+    </script>
+</body>
+</html>

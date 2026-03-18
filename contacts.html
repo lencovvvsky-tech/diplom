@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты - Демиург Мебель</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <a href="index.html" class="logo">
+                    <img src="Image/logo.png" alt="Демиург Мебель">
+                </a>
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="usluga-korpusnaya.html">Услуги</a></li>
+                        <li><a href="about.html">О компании</a></li>
+                        <li><a href="gallery.html">Галерея</a></li>
+                        <li><a href="reviews.html">Отзывы</a></li>
+                        <li><a href="contacts.html" class="active">Контакты</a></li>
+                    </ul>
+                </nav>
+                <div class="header__contacts">
+                    <a href="tel:+79624559569" class="phone">+7 (962) 455-95-69</a>
+                    <button class="btn btn--small">Позвонить</button>
+                </div>
+                <button class="theme-toggle" id="theme-toggle">🌙</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Блок контактов -->
+        <section class="contacts">
+            <div class="container">
+                <div class="contacts__inner">
+                    <!-- Левая колонка: форма обратной связи -->
+                    <div class="contacts__form">
+                        <h2>Форма обратной связи</h2>
+                        <form id="feedback-form">
+                            <input type="text" name="name" placeholder="Имя" required>
+                            <input type="text" name="location" placeholder="Местоположение" required>
+                            <input type="tel" name="phone" placeholder="Телефон" required>
+                            <div class="checkbox">
+                                <input type="checkbox" id="agree" required>
+                                <label for="agree">Нажимая кнопку «Отправить» вы соглашаетесь с политикой конфиденциальности</label>
+                            </div>
+                            <button type="submit" class="btn">Отправить</button>
+                        </form>
+                    </div>
+                    <!-- Правая колонка: контактная информация -->
+                    <div class="contacts__info">
+                        <h2>Контакты</h2>
+                        <p>Остались вопросы? Свяжитесь с нами</p>
+                        <div class="contacts__item">
+                            <img src="Image/contacts-phone.svg" alt="Телефон">
+                            <a href="tel:+79624559569">+7 (962) 455-95-69</a>
+                        </div>
+                        <div class="contacts__item">
+                            <img src="Image/contacts-mail.svg" alt="Email">
+                            <a href="mailto:Demiurge.mebel@mail.ru">Demiurge.mebel@mail.ru</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__inner">
+                <a href="index.html" class="footer__logo">
+                    <img src="Image/logo.png" alt="Демиург Мебель">
+                </a>
+                <nav class="footer__nav">
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="usluga-korpusnaya.html">Услуги</a></li>
+                        <li><a href="about.html">О компании</a></li>
+                        <li><a href="gallery.html">Галерея</a></li>
+                        <li><a href="reviews.html">Отзывы</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </nav>
+                <div class="footer__social">
+                    <a href="https://vk.com/girenko92" target="_blank"><img src="Image/vk.svg" alt="VK"></a>
+                    <a href="https://wa.me/message/7D5B4LRJMRR7D1" target="_blank"><img src="Image/whatsapp.svg" alt="WhatsApp"></a>
+                </div>
+                <div class="footer__info">
+                    <p>ИП Гиренко О.А.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Подключение скриптов -->
+    <script src="js/theme.js"></script>
+    <script src="js/feedback.js"></script>
+    <script src="js/notifications.js"></script>
+</body>
+</html>

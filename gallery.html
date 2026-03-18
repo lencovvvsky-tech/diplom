@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Галерея - Демиург Мебель</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Шапка (такая же, как на других страницах) -->
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <a href="index.html" class="logo">
+                    <img src="Image/logo.png" alt="Демиург Мебель">
+                </a>
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="usluga-korpusnaya.html">Услуги</a></li>
+                        <li><a href="about.html">О компании</a></li>
+                        <li><a href="gallery.html" class="active">Галерея</a></li>
+                        <li><a href="reviews.html">Отзывы</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </nav>
+                <div class="header__contacts">
+    <a href="tel:+79624559569" class="phone">+7 (962) 455-95-69</a>
+    <button class="btn btn--small">Позвонить</button>
+</div>
+<button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">🌙</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="gallery">
+            <div class="container">
+                <h1 class="gallery__title">Галерея наших работ</h1>
+                <p class="gallery__description">Мы создаём уникальную мебель, которая радует глаз и служит годами. Вот несколько примеров наших проектов.</p>
+
+                <!-- Сетка с чередованием больших и маленьких фото -->
+                <div class="gallery__grid">
+                    <!-- Большое фото (слева) + маленькое (справа) - ряд 1 -->
+                    <div class="gallery__item gallery__item--large">
+                        <img src="Image/8da00e85_1847_11eb_910d_bc5ff4d14260.jpg" alt="Кухня в современном стиле">
+                    </div>
+                    <div class="gallery__item gallery__item--small">
+                        <img src="Image/098db61a_46b1_11e3_b70e_00269e0aabeb_098db61a_46b1_11e3_b70e_00269e0aabeb.jpeg" alt="Шкаф-купе">
+                    </div>
+
+                    <!-- Маленькое (слева) + большое (справа) - ряд 2 -->
+                    <div class="gallery__item gallery__item--small">
+                        <img src="Image/1666964311_46-idei-club-p-kukhni-s-levim-uglom-instagram-52.jpg" alt="Угловая кухня">
+                    </div>
+                    <div class="gallery__item gallery__item--large">
+                        <img src="Image/af6be235ea8b04545c378bb67504f47d.jpg" alt="Гардеробная">
+                    </div>
+
+                    <!-- Большое (слева) + маленькое (справа) - ряд 3 -->
+                    <div class="gallery__item gallery__item--large">
+                        <img src="Image/bf6e8abe-3ece-4156-9b74-e94bd86995a6-1.jpg" alt="Спальный гарнитур">
+                    </div>
+                    <div class="gallery__item gallery__item--small">
+                        <img src="Image/kartinka-2.png" alt="Прихожая">
+                    </div>
+
+                    <!-- Если хочешь добавить ещё фото, просто копируй блоки с правильными классами -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__inner">
+                <a href="index.html" class="footer__logo">
+                    <img src="Image/logo.png" alt="Демиург Мебель">
+                </a>
+                <nav class="footer__nav">
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="usluga-korpusnaya.html">Услуги</a></li>
+                        <li><a href="about.html">О компании</a></li>
+                        <li><a href="gallery.html">Галерея</a></li>
+                        <li><a href="reviews.html">Отзывы</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </nav>
+                <div class="footer__social">
+                    <a href="https://vk.com/girenko92" target="_blank"><img src="Image/vk.svg" alt="VK"></a>
+                    <a href="https://wa.me/message/7D5B4LRJMRR7D1" target="_blank"><img src="Image/whatsapp.svg" alt="WhatsApp"></a>
+                </div>
+                <div class="footer__info">
+                    <p>ИП Гиренко О.А.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="js/theme.js"></script>
+</body>
+</html>

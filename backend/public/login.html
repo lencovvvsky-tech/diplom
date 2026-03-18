@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Вход в админку</title>
+    <style>
+        body { font-family: Arial; background: #f0f0f0; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .login-form { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        input { display: block; width: 250px; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 4px; }
+        button { background: #FF4949; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; }
+        .error { color: red; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="login-form">
+        <h2>Вход в админ-панель</h2>
+        <input type="text" id="login" placeholder="Логин" value="admin">
+        <input type="password" id="password" placeholder="Пароль" value="admin123">
+        <button onclick="login()">Войти</button>
+        <div class="error" id="error"></div>
+    </div>
+    <script>
+        async function login() {
+            const login = document.getElementById('login').value;
+            const password = document.getElementById('password').value;
+            const response = await fetch('/api/admin/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ login, password })
+            });
+            if (response.ok) {
+                localStorage.setItem('adminAuth', 'true');
+                 localStorage.setItem('adminLogin', login);
+                window.location.href = '/admin/admin.html';
+            } else {
+                document.getElementById('error').textContent = 'Неверный логин или пароль';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отзывы - Демиург Мебель</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <a href="index.html" class="logo">
+                    <img src="Image/logo.png" alt="Демиург Мебель">
+                </a>
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="usluga-korpusnaya.html">Услуги</a></li>
+                        <li><a href="about.html">О компании</a></li> 
+                        <li><a href="gallery.html">Галерея</a></li>
+                        <li><a href="reviews.html" class="active">Отзывы</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </nav>
+                <div class="header__contacts">
+                    <a href="tel:+79624559569" class="phone">+7 (962) 455-95-69</a>
+                    <button class="btn btn--small">Позвонить</button>
+                </div>
+                <button class="theme-toggle" id="theme-toggle">🌙</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="reviews-page">
+            <div class="container">
+                <h1>Отзывы наших клиентов</h1>
+
+                <!-- Список отзывов -->
+                <div class="reviews__grid" id="reviews-container">
+                    <!-- Отзывы из базы -->
+                </div>
+
+                <!-- Форма добавления отзыва (красивая) -->
+                <div class="review-form">
+                    <h2>Оставить отзыв</h2>
+                    <form id="review-form">
+                        <!-- Имя -->
+                        <div class="form-group">
+                            <label for="author">Ваше имя</label>
+                            <input type="text" id="author" name="author" placeholder="Например, Анна" required>
+                        </div>
+
+                        <!-- Дата (автоматически) -->
+                        <div class="form-group">
+                            <label for="date">Дата</label>
+                            <input type="date" id="date" name="date" readonly>
+                        </div>
+
+                        <!-- Отзыв (большое поле) -->
+                        <div class="form-group">
+                            <label for="text">Ваш отзыв</label>
+                            <textarea id="text" name="text" placeholder="Напишите, что вам понравилось..." rows="6" required></textarea>
+                        </div>
+
+                        <!-- Рейтинг звёздами (стилизованный) -->
+                        <div class="form-group rating-group">
+                            <label>Оценка</label>
+                           <div class="stars">
+    <input type="radio" name="rating" value="5" id="star5" checked><label for="star5">★</label>
+    <input type="radio" name="rating" value="4" id="star4"><label for="star4">★</label>
+    <input type="radio" name="rating" value="3" id="star3"><label for="star3">★</label>
+    <input type="radio" name="rating" value="2" id="star2"><label for="star2">★</label>
+    <input type="radio" name="rating" value="1" id="star1"><label for="star1">★</label>
+</div>
+
+                        <!-- Ссылка на Яндекс (необязательно) -->
+                        <div class="form-group">
+                            <label for="yandex_link">Ссылка на Яндекс.Отзывы (необязательно)</label>
+                            <input type="url" id="yandex_link" name="yandex_link" placeholder="https://yandex.ru/maps/...">
+                        </div>
+
+                        <!-- Согласие -->
+                        <div class="checkbox">
+                            <input type="checkbox" id="agree" required>
+                            <label for="agree">Я согласен на обработку персональных данных</label>
+                        </div>
+
+                        <button type="submit" class="btn btn--large">Отправить отзыв</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__inner">
+                <a href="index.html" class="footer__logo">
+                    <img src="Image/logo.png" alt="Демиург Мебель">
+                </a>
+                <nav class="footer__nav">
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="usluga-korpusnaya.html">Услуги</a></li>
+                        <li><a href="about.html">О компании</a></li>
+                        <li><a href="gallery.html">Галерея</a></li>
+                        <li><a href="reviews.html">Отзывы</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </nav>
+                <div class="footer__social">
+                    <a href="https://vk.com/girenko92" target="_blank"><img src="Image/vk.svg" alt="VK"></a>
+                    <a href="https://wa.me/message/7D5B4LRJMRR7D1" target="_blank"><img src="Image/whatsapp.svg" alt="WhatsApp"></a>
+                </div>
+                <div class="footer__info">
+                    <p>ИП Гиренко О.А.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/theme.js"></script>
+    <script src="js/reviews.js"></script>
+    <script src="js/notifications.js"></script>
+</body>
+</html>
